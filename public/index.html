@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL Shortener</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hero-bg {
+            background: linear-gradient(120deg, #6e8894, #544e61);
+            color: #fff;
+        }
+        .input-field {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn-primary {
+            background-color: #85baa1;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #6e8894;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold mb-4">URL Shortener</h1>
+            <p class="text-lg mb-6">Shorten your URLs and share them with ease! Customize your links for a personal touch.</p>
+        </div>
+    </section>
+
+    <!-- URL Shortener Form Section -->
+    <section class="py-16 bg-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4">Create Your Short URL</h2>
+                <form id="shortenForm">
+                    <div class="mb-4">
+                        <label for="originalUrl" class="block text-sm font-medium text-gray-700">Original URL</label>
+                        <input type="url" id="originalUrl" name="originalUrl" required class="w-full p-3 mt-2 text-gray-900 input-field" placeholder="Enter your URL here">
+                    </div>
+                    <div class="mb-4">
+                        <label for="customAlias" class="block text-sm font-medium text-gray-700">Custom Alias</label>
+                        <input type="text" id="customAlias" name="customAlias" required class="w-full p-3 mt-2 text-gray-900 input-field" placeholder="Custom alias (e.g., my-link)" minlength="3">
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-3 mt-4">Shorten URL</button>
+                </form>
+
+                <!-- Response Section -->
+                <div id="result" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold">Your Short URL</h3>
+                    <p id="shortUrl" class="text-blue-500"></p>
+                    <button id="copyBtn" class="btn-primary mt-4 w-full py-3">Copy URL</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 URL Shortener. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const form = document.getElementById("shortenForm");
+        const resultDiv = document.getElementById("result");
+        const shortUrlElement = document.getElementById("shortUrl");
+        const copyBtn = document.getElementById("copyBtn");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const originalUrl = document.getElementById("originalUrl").value;
+            const customAlias = document.getElementById("customAlias").value;
+
+            const response = await fetch("/api/shorten", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    originalUrl,
+                    customAlias,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                resultDiv.classList.remove("hidden");
+                shortUrlElement.textContent = data.shortUrl;
+            } else {
+                alert(data.error || "Something went wrong!");
+            }
+        });
+
+        copyBtn.addEventListener("click", () => {
+            const url = shortUrlElement.textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert("URL copied to clipboard!");
+            });
+        });
+    </script>
+</body>
+</html>
