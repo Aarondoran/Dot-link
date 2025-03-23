@@ -13,9 +13,9 @@ DotLink is a minimal URL shortener that allows only the owner to create shortene
 ## 🛠️ Setup  
 
 ### 1️⃣ Clone the Repository  
-```git clone https://github.com/YOUR_USERNAME/dotlink.git```
-
-```cd dotlink```
+use the following command:
+```git clone https://github.com/YOUR_USERNAME/dotlink.git
+cd dotlink```
 
 ### 2️⃣ Install Dependencies  
 `npm install`  
