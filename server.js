@@ -1,14 +1,15 @@
 const express = require("express");
-const { Pool } = require("pg");
 
 const app = express();
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT;
 
-// ✅ PostgreSQL connection setup
+const { Pool } = require("pg");
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false }, // ✅ Xata requires SSL
 });
+
 
 // Middleware
 app.use(express.json());
@@ -21,8 +22,6 @@ app.post("/api/shorten", async (req, res) => {
 
   // Ensure the alias is not empty
   if (!customAlias) return res.status(400).json({ error: "Custom alias is required" });
-
-  if (!originalUrl) return res.status(400).json({ error: "URL is required" });
 
   if (!/^https?:\/\//i.test(originalUrl)) {
     originalUrl = `https://${originalUrl}`;
@@ -55,19 +54,6 @@ app.get("/:id", async (req, res) => {
   await pool.query("UPDATE urls SET clicks = clicks + 1 WHERE short_id = $1", [id]);
 
   res.redirect(urlEntry.original_url);
-});
-
-// Admin dashboard
-app.get("/admin", async (req, res) => {
-  const result = await pool.query("SELECT * FROM urls");
-  let urlListHtml = `<h1>Admin Dashboard</h1><ul>`;
-
-  result.rows.forEach(({ short_id, clicks }) => {
-    urlListHtml += `<li><a href="/check/${short_id}">${short_id}</a> - Clicks: ${clicks}</li>`;
-  });
-
-  urlListHtml += "</ul>";
-  res.send(urlListHtml);
 });
 
 // Check URL details
