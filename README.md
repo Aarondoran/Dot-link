@@ -54,7 +54,6 @@ Request Body:
 `{  
   "originalUrl": "https://example.com",  
   "customAlias": "myalias",  
-  "password": "your_secure_password"  
 }`
 Response:
 `{  
