@@ -68,7 +68,7 @@ GET `/:short_id`
 Example:
 GET `http://yourdomain.com/myalias`
 
-- Redirects to https://example.com
+➤ Redirects to https://example.com
 
 ## License
 This project is licensed under the MIT License.
