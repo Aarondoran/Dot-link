@@ -12,16 +12,16 @@ DotLink is a minimal URL shortener that allows only the owner to create shortene
 
 ## 🛠️ Setup  
 
-### 1️⃣ Clone the Repository  
+### 1️ Clone the Repository  
 use the following command:
-```git clone https://github.com/YOUR_USERNAME/dotlink.git
-cd dotlink```
+git clone https://github.com/YOUR_USERNAME/dotlink.git
+cd dotlink
 
-### 2️⃣ Install Dependencies  
-`npm install`  
+### 2️ Install Dependencies  
+npm install
 
 ### 3️⃣ Configure Environment Variables  
 
 Create a `.env` file in the root directory and add the following:  
-```PORT=3030
-DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE```
+PORT=3030
+DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE
