@@ -20,7 +20,7 @@ cd dotlink
 ### 2️ Install Dependencies  
 npm install
 
-### 3️⃣ Configure Environment Variables  
+### 3️ Configure Environment Variables  
 
 Create a `.env` file in the root directory and add the following:  
 PORT=3030
@@ -28,7 +28,7 @@ DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE
 
 **Replace** the `DATABASE_URL` with your actual PostgreSQL connection string.  
 
-### 4️⃣ Set Up the Database  
+### 4️ Set Up the Database  
 
 Create a `urls` table in your PostgreSQL database:  
 
@@ -39,4 +39,8 @@ CREATE TABLE urls (
     original_url TEXT NOT NULL,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
 );```
+
+### 5 start the server
+run manually:
+`node server.js`
 
