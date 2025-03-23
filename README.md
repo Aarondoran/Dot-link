@@ -38,9 +38,14 @@ CREATE TABLE urls (
     short_id VARCHAR(255) UNIQUE NOT NULL,  
     original_url TEXT NOT NULL,  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  
-);```
+); ```
 
 ### 5 start the server
 run manually:
 `node server.js`
+
+OR
+
+Run with PM2 (recommended for production):
+`pm2 start server.js --name dotlink`
 
