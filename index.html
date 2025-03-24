@@ -71,42 +71,11 @@
 
     <script>
         const form = document.getElementById("shortenForm");
-        const resultDiv = document.getElementById("result");
-        const shortUrlElement = document.getElementById("shortUrl");
-        const copyBtn = document.getElementById("copyBtn");
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const originalUrl = document.getElementById("originalUrl").value;
-            const customAlias = document.getElementById("customAlias").value;
-
-            const response = await fetch("/api/shorten", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    originalUrl,
-                    customAlias,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                resultDiv.classList.remove("hidden");
-                shortUrlElement.textContent = data.shortUrl;
-            } else {
-                alert(data.error || "Something went wrong!");
-            }
-        });
-
-        copyBtn.addEventListener("click", () => {
-            const url = shortUrlElement.textContent;
-            navigator.clipboard.writeText(url).then(() => {
-                alert("URL copied to clipboard!");
-            });
+            alert('received URL(This is a Demo, the app would now give you the shortened Url below the form with a copy button)');
         });
     </script>
 </body>
