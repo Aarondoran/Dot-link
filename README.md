@@ -19,12 +19,15 @@ cd dotlink``
 
 2️. Install Dependencies
 Run the following command:
+
 `npm install`
 
 3️. Configure Environment Variables
 Create a .env file in the root directory and add the following:
+
 `PORT=3030  
 DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@YOUR_HOST/YOUR_DATABASE`
+
 Replace the DATABASE_URL with your actual PostgreSQL connection string.
 
 4️. Set Up the Database
@@ -39,11 +42,13 @@ Create a urls table in your PostgreSQL database:
 
 5️. Start the Server
 Run manually:
+
 `node server.js`
 
 OR
 
 Run with PM2 (recommended for production):
+
 `pm2 start server.js --name dotlink`
 
 ## API Endpoints
