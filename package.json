@@ -1,7 +1,7 @@
 {
-  "name": "glitch-hello-node",
+  "name": "Node-URL-shortener",
   "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "description": "My cool URL shortener",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -14,11 +14,11 @@
     "node": "14.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": "https://github.com/Aarondoran/Node-URL-shortener"
   },
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch"
+    "URL-shortener"
   ]
 }
