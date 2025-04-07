@@ -16,6 +16,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+app.use((req, res) => {
+  res.status(404).sendFile(__dirname + "/public/not_found.html");
+});
+
+
 // Shorten URL with custom alias (no empty alias)
 app.post("/api/shorten", async (req, res) => {
   let { originalUrl, customAlias } = req.body;
