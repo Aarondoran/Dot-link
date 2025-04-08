@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use((req, res) => {
-  res.status(404).sendFile(__dirname + "/public/not_found.html");
+  res.status(404).sendFile(__dirname + "/public/404.html");
 });
 
 
