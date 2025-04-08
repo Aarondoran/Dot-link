@@ -32,6 +32,10 @@ app.post("/api/shorten", async (req, res) => {
     originalUrl = `https://${originalUrl}`;
   }
 
+  if (!/^[a-zA-Z0-9-_]+$/.test(customAlias)) {
+  return res.status(400).json({ error: "Invalid alias format. Only letters, num>
+}
+  
   // Check if the custom alias already exists in the database
   const existing = await pool.query("SELECT * FROM urls WHERE short_id = $1", [customAlias]);
 
