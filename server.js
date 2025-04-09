@@ -32,12 +32,12 @@ app.post("/api/shorten", async (req, res) => {
     originalUrl = `https://${originalUrl}`;
   }
 
-  // Check alias format
-  if (!/^[a-zA-Z0-9_-]+$/.test(customAlias)) {
-    return res.status(400).json({
-      error: "Invalid alias format. Only letters, numbers, hyphens (-), and underscores (_) are allowed.",
-    });
-  }
+// Check alias format
+if (!/^[a-zA-Z0-9_-]+$/.test(customAlias)) {
+  return res.status(400).json({
+    error: "Invalid alias format. Only letters, numbers, hyphens (-), and underscores (_) are allowed.",
+  });
+}
   
   // Check if the custom alias already exists in the database
   const existing = await pool.query("SELECT * FROM urls WHERE short_id = $1", [customAlias]);
