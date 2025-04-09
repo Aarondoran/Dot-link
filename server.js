@@ -11,6 +11,14 @@ const pool = new Pool({
   ssl: { rejectUnauthorized: false }, // SSL
 });
 
+pool.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err);
+});
+
+app.use((err, req, res, next) => {
+  console.error('Database error:', err);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
 // Middleware
 app.use(express.json());
