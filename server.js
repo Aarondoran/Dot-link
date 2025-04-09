@@ -16,10 +16,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.use((req, res) => {
-  res.status(404).sendFile(__dirname + "/public/404.html");
-});
-
 
 // Shorten URL with custom alias (no empty alias)
 app.post("/api/shorten", async (req, res) => {
@@ -83,6 +79,10 @@ app.get("/check/:id", async (req, res) => {
     <p><b>Original URL:</b> <a href="${urlEntry.original_url}" target="_blank">${urlEntry.original_url}</a></p>
     <p><b>Clicks:</b> ${urlEntry.clicks}</p>
   `);
+});
+
+app.use((req, res) => {
+  res.status(404).sendFile(__dirname + "/public/404.html");
 });
 
 // Start server
