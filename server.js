@@ -63,7 +63,7 @@ app.get("/:id", async (req, res) => {
   const { id } = req.params;
   const result = await pool.query("SELECT * FROM urls WHERE short_id = $1", [id]);
 
-  if (result.rows.length === 0) return res.status(404).sendFile(__dirname + "/public/not_found.html");
+  if (result.rows.length === 0) return res.status(404).sendFile(__dirname + "/public/404.html");
 
   const urlEntry = result.rows[0];
 
