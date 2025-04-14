@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send release webhook
-        uses: johannes-huther/webhook.sh@v1.0.0
         with:
           webhook_url: ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }}
           webhook_type: json
