@@ -1,0 +1,21 @@
+name: Post Release to Announcement DB
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  send-webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send release data to announcements webhook
+        run: |
+          curl -X POST ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }} \
+          -H "Content-Type: application/json" \
+          -d '{
+            "release": {
+              "name": "${{ github.event.release.name }}",
+              "tag_name": "${{ github.event.release.tag_name }}",
+              "body": "${{ github.event.release.body }}"
+            }
+          }'
