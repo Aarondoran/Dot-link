@@ -1,4 +1,4 @@
-name: Announce release to database
+name: Announce release to endpoint
 
 on:
   release:
