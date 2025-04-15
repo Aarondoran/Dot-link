@@ -1,21 +1,25 @@
-name: Post Release to Announcement DB
+name: Announce release to database
 
 on:
   release:
     types: [published]
 
 jobs:
-  send-webhook:
+  announce:
     runs-on: ubuntu-latest
     steps:
-      - name: Send release data to announcements webhook
-        run: |
-          curl -X POST ${{ secrets.ANNOUNCEMENT_WEBHOOK_URL }} \
-          -H "Content-Type: application/json" \
-          -d '{
-            "release": {
-              "name": "${{ github.event.release.name }}",
-              "tag_name": "${{ github.event.release.tag_name }}",
-              "body": "${{ github.event.release.body }}"
+      - name: Send Webhook to Announcement API
+        uses: Satak/webrequest-action@v1.2.3
+        with:
+          url: https://prickle-silky-cerise.glitch.me/api/add-announcement
+          method: POST
+          payload: |
+            {
+              "title": "${{ github.event.release.name }}",
+              "message": "${{ github.event.release.body }}"
             }
-          }'
+          headers: |
+            {
+              "Content-Type": "application/json"
+              "Authorization": "Bearer ${{ secrets.ANNOUNCE_TOKEN }}"
+            }
