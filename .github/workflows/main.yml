@@ -1,4 +1,4 @@
-name: Announce release to endpoint
+name: Announce release to db
 
 on:
   release:
@@ -13,13 +13,5 @@ jobs:
         with:
           url: https://prickle-silky-cerise.glitch.me/api/add-announcement
           method: POST
-          payload: |
-            {
-              "title": "${{ github.event.release.name }}",
-              "message": "${{ github.event.release.body }}"
-            }
-          headers: |
-            {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer ${{ secrets.ANNOUNCE_TOKEN }}"
-            }
+          headers: ${{ toJSON({ "Content-Type": "application/json", "Authorization": "Bearer ${{ secrets.ANNOUNCE_TOKEN }}" }) }}
+          payload: ${{ toJSON({ "title": github.event.release.name, "message": github.event.release.body }) }}
