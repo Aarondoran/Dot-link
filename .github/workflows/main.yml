@@ -1,26 +1,20 @@
-name: Announce to database
+name: Announce to web app
 
 on:
   release:
     types: [published]
 
 jobs:
-  announce:
+  deployment:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Send Release Announcement to API
-        id: api-request
-        uses: muhfaris/request-action@v1
+      - name: Deploy Stage
+        uses: fjogeleit/http-request-action@v1
         with:
-          url: https://prickle-silky-cerise.glitch.me/api/add-announcement
-          method: POST
-          headers: |
-            {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer ${{ secrets.ANNOUNCE_TOKEN }}"
-            }
-          body: |
+          url: 'https://prickle-silky-cerise.glitch.me/api/announcement'
+          method: 'POST'
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: |
             {
               "title": "${{ github.event.release.name }}",
               "message": "${{ github.event.release.body }}"
